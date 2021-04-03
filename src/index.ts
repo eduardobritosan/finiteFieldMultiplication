@@ -1,6 +1,9 @@
+import bitwise, { bits } from 'bitwise';
+import { toBits } from 'bitwise/string';
+import { UInt8 } from 'bitwise/types';
 export class gfMult {
-  private aesByte: string = '00011011';
-  private snowByte: string = '10101001';
+  private aesByte: Array<0 | 1> = [0, 0, 0, 1, 1, 0, 1, 1];
+  private snowByte: Array<0 | 1> = [1, 0, 1, 0, 1, 0, 0, 1];
 
   constructor(private firstByte: Uint32Array, private secondByte: Uint32Array,
     private multType: string) {
@@ -42,3 +45,17 @@ const snowByte = hex2bin('A9');
 
 console.log(`\tAlgorithm byte: ${aesByte}`);
 console.log(`\tAlgorithm byte: ${snowByte}`);
+
+let aes: Array<number> = Array.from(hex2bin('1B').split('').map((bit) => {
+  return Number(bit)
+}));
+
+let snow: Array<number> = Array.from(hex2bin('1B').split('').map((bit) => {
+  return Number(bit)
+}));
+
+
+const test = toBits(hex2bin('1B'));
+
+console.log(bits.reduceXor(test))
+
